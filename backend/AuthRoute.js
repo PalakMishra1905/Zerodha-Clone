@@ -1,3 +1,4 @@
+//Login, Signup routes.
 const { Signup, Login} = require("./AuthController.js");
 const router = require("express").Router();
 const {userVerification} = require("./AuthMiddleware.js");
