@@ -1,7 +1,10 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Navbar() {
+  const { logout, isAuthenticated, loginWithRedirect } = useAuth0();
+
   return (
     <nav class="navbar navbar-expand-lg border-bottom" style={{backgroundColor:"#FFF"}}>
     <div class="container p-2">
@@ -23,11 +26,13 @@ function Navbar() {
 
       <form class="d-flex" role="search">
             <ul class="navbar-nav me-auto mb-lg-0">
-              <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" to="/signup">
-                  Signup
-                </Link>
-              </li>
+             {isAuthenticated ? 
+              ( <li class="nav-item nav-link active" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+                Logout
+                </li>):
+              (<li class="nav-item nav-link active" onClick={() => loginWithRedirect()}>
+                  Login
+                </li>)}
               <li class="nav-item">
                 <Link class="nav-link active" to="/about">
                   About

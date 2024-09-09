@@ -1,25 +1,22 @@
 require('dotenv').config();
-
-
 const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require("cookie-parser");
-const authRoute = require("./AuthRoute.js");
 
 const app = express();
 
 app.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3002"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }));
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.json());
 
-app.use("/", authRoute);
 
 const {HoldingsModel} = require("./Model/HoldingsModel.js");
 const {PositionsModel} = require("./Model/PositionsModel.js");
